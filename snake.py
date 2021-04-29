@@ -2,15 +2,6 @@ import random
 
 import pygame
 
-pygame.init()
-
-resolucao = (500, 500)
-
-screen = pygame.display.set_mode(resolucao)
-pygame.display.set_caption("Snake")
-clock = pygame.time.Clock()
-
-preto = (0, 0, 0)
 
 class Snake:
   cor = (255, 255, 255)
@@ -66,6 +57,7 @@ class Snake:
   def comer(self):
     self.corpo.append((0, 0))
     self.pontos += 1
+    pygame.display.set_caption("Snake | Pontos: {}".format(self.pontos))
 
   def colisao(self):
     cabeca = self.corpo[0]
@@ -90,44 +82,53 @@ class Frutinha:
   def blit(self, screen):
     screen.blit(self.textura, self.posicao)
 
+if __name__=="__main__":
+  pygame.init()
+  resolucao = (500, 500)
+  screen = pygame.display.set_mode(resolucao)
+  pygame.display.set_caption("Snake")
+  clock = pygame.time.Clock()
 
-frutinha = Frutinha()
-cobrinha = Snake()
-
-
-while True:
-  clock.tick(10)
-
-  for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-      exit()
-
-    if event.type == pygame.KEYDOWN:
-      if event.key == pygame.K_UP:
-        cobrinha.cima()
-        break
-      elif event.key == pygame.K_DOWN:
-        cobrinha.baixo()
-        break
-      elif event.key == pygame.K_LEFT:
-        cobrinha.esquerda()
-        break
-      elif event.key == pygame.K_RIGHT:
-        cobrinha.direita()
-        break
-
-  if cobrinha.colisao_frutinha(frutinha):
-    cobrinha.comer()
-    frutinha = Frutinha()
-  
-  if cobrinha.colisao():
-    cobrinha = Snake()
-
-  cobrinha.andar()
-
+  preto = (0, 0, 0)
   screen.fill(preto)
 
+  frutinha = Frutinha()
   frutinha.blit(screen)
-  cobrinha.blit(screen)
 
-  pygame.display.update()
+  cobrinha = Snake()
+
+  while True:
+    clock.tick(10)
+
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        exit()
+
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_UP:
+          cobrinha.cima()
+          break
+        elif event.key == pygame.K_DOWN:
+          cobrinha.baixo()
+          break
+        elif event.key == pygame.K_LEFT:
+          cobrinha.esquerda()
+          break
+        elif event.key == pygame.K_RIGHT:
+          cobrinha.direita()
+          break
+
+    if cobrinha.colisao_frutinha(frutinha):
+      cobrinha.comer()
+      frutinha = Frutinha()
+    
+    if cobrinha.colisao():
+      cobrinha = Snake()
+
+    cobrinha.andar() 
+    
+    screen.fill(preto)
+    frutinha.blit(screen)
+    cobrinha.blit(screen)
+
+    pygame.display.update()
