@@ -7,6 +7,7 @@ class Snake:
   cor = (255, 255, 255)
   tamanho = (10, 10)
   velocidade = 10
+  tamanho_maximo = 49 * 49
 
   def __init__(self):
     self.textura = pygame.Surface(self.tamanho)
@@ -64,7 +65,7 @@ class Snake:
     calda = self.corpo[1:]
     x = cabeca[0]
     y = cabeca[1]
-    return x < 0 or y < 0 or x > 490 or y > 490 or cabeca in calda
+    return x < 0 or y < 0 or x > 490 or y > 490 or cabeca in calda or len(self.corpo) > self.tamanho_maximo
 
 
 class Frutinha:
