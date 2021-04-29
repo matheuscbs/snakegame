@@ -65,11 +65,12 @@ class Snake:
   def comer(self):
     self.corpo.append((0, 0))
 
-  def colisao_parede(self):
+  def colisao(self):
     cabeca = self.corpo[0]
+    calda = self.corpo[1:]
     x = cabeca[0]
     y = cabeca[1]
-    return x < 0 or y < 0 or x > 490 or y > 490
+    return x < 0 or y < 0 or x > 490 or y > 490 or cabeca in calda
 
 
 class Frutinha:
@@ -117,7 +118,7 @@ while True:
     cobrinha.comer()
     frutinha = Frutinha()
   
-  if cobrinha.colisao_parede():
+  if cobrinha.colisao():
     cobrinha = Snake()
 
   cobrinha.andar()
