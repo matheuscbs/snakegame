@@ -22,6 +22,7 @@ class Snake:
     self.textura.fill(self.cor)
     self.corpo = [(100, 100), (90, 100), (80, 100)]
     self.direcao = "direita"
+    self.pontos = 0
 
   def blit(self, screen):
     for posicao in self.corpo:
@@ -64,6 +65,7 @@ class Snake:
 
   def comer(self):
     self.corpo.append((0, 0))
+    self.pontos += 1
 
   def colisao(self):
     cabeca = self.corpo[0]
