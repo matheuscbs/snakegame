@@ -62,7 +62,7 @@ class Snake:
   def colisao_frutinha(self, frutinha):
     return self.corpo[0] == frutinha.posicao
 
-  def comer(self, frutinha):
+  def comer(self):
     self.corpo.append((0, 0))
 
 
@@ -107,10 +107,11 @@ while True:
         cobrinha.direita()
         break
 
-  cobrinha.andar()
-
   if cobrinha.colisao_frutinha(frutinha):
-    cobrinha.comer(frutinha)
+    cobrinha.comer()
+    frutinha = Frutinha()
+  
+  cobrinha.andar()
 
   screen.fill(preto)
 
