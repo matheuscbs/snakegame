@@ -7,7 +7,7 @@ pygame.init()
 resolucao = (500, 500)
 
 screen = pygame.display.set_mode(resolucao)
-
+pygame.display.set_caption("Snake")
 clock = pygame.time.Clock()
 
 preto = (0, 0, 0)
